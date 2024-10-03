@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 90%;
+    margin: auto; 
+    overflow: hidden;
+}      
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.product-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: calc(33.333% - 40px);
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+}
+
+.product-card h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.product-card p {
+    color: #555;
+    margin: 0;
+    padding: 0 10px;
+}
+
+.product-card .price {
+    font-size: 1.5em;
+    color: #e74c3c;
+}
+
+.product-card .rating {
+    color: #f39c12;
+}
+
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <div id="product-list" class="product-list"></div>
+    </div>
+    <script src="script.js"></script> 
+
+    </script>
+     
+    <script>
+
+
+document.addEventListener("DOMContentLoaded", function() { 
+    const productList = document.getElementById('product-list');
+
+    // Sample JSON data
+    const products = [
+        {
+          
+            "image": "https://khaadisales.myshopify.com/cdn/shop/files/ASIM-JOFA-EMBROIDERED-SUMMER-WOMEN-3PC_fb264b47-49b0-47a8-bbbe-463f3f9abf03_1800x1800.jpg?v=1717982342",
+            "title": "Women Handbags Designer Shoulder Tote Bag",
+            "price": "Rs. 4,470 ",
+            "category": "Ladies purse",
+            "rating": 4.5
+        },
+        {
+            "image": "https://saya.pk/cdn/shop/files/U02-23074-06A-F.jpg?v=1707284430&width=700",
+            "title": "  Jacquard Cotton 2 Piece",
+            "price": "Rs. 2,499",
+            "category": "3 piece",
+            "rating": 4.0
+        },
+        {
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRezf2tLeGRj2d-g-VJDONA3Fnf4A1UO9t3HA&s",
+            "title": "Purple Styling Suit",
+            "price": " Rs. 7,990",
+            "category": "Shalwar kameez",
+            "rating": 4.7
+        },
+        {
+            "image": "https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dw15674c58/images/hi-res/esb23450_black_2.jpg?sw=400&sh=600",
+            "title": " Pants",
+            "price": "Rs. 699",
+            "category": "2 piece",
+            "rating": 4.3
+        },
+        {
+            "image": "https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dwd7d05f1b/images/hi-res/est24523_navy_2.jpg?sw=400&sh=600",
+            "title": "Kurta | Embroidered",
+            "price": " Rs. 12,000 ",
+            "category": "3 piece",
+            "rating": 4.8
+        },
+        {
+            "image": " https://missrose.com.pk/cdn/shop/products/WhatsAppImage2021-09-18at2.13.07PM_46e62300-a5da-4585-985c-24a4f5e74308.jpg?v=1632556837&width=360",
+            "title": "MISS ROSE New Professional Makeup Palette KIT",
+            "price": "Rs.Rs.4,500 ",
+            "category": "makeup for woman",
+            "rating": 4.2
+        },
+        {
+            "image": "https://cdn.shopify.com/s/files/1/0003/5815/4293/files/SV-8241_Cam002_M1.webp?v=1725709272",
+            "title": "Sveston Maverick (2in1)",
+            "price": " Sale priceRs.11,500 ",
+            "category": "Watch",
+            "rating": 4.6
+        },
+        {
+            "image": "https://www.julke.pk/cdn/shop/products/Klein-mens-leather-wallet-soft-black-three-quarter-view-JULKE_400x.jpg?v=1675942919",
+            "title": "Klein",
+            "price": "Rs.3,480",
+            "category": "men purse",
+            "rating": 4.1
+        },
+        {
+            "image": "https://media.naheed.pk/catalog/product/cache/fd6f1e57839b9b324771e8de21428b3f/1/1/1177065-1.jpg",
+            "title": "Mural De Ruitz Mural In Black Pour Homme Eau de Toilette, 100ml",
+            "price": "Rs. 3,000",
+            "category": "perfume",
+            "rating": 4.4
+        },
+        {
+            "image": "https://www.gulahmedshop.com/media/catalog/product/c/a/camel_styling_suit_sk-psd24-013_3_.jpg?optimize=medium&auto=webp&bg-color=255,255,255&fit=bounds&canvas=2:3&heigh",
+            "title": "Camel Styling Suit",
+            "price": "Rs. 12,999",
+            "category": "Salwar kameez",
+            "rating": 4.5
+        },
+        {
+            "image": "https://www.gulahmedshop.com/media/catalog/product/3/4/346272_2_.jpg?optimize=medium&auto=webp&bg-color=255,255,255&fit=bounds&canvas=2:3&height=825&width=550",
+            "title": "Chairman Latha Unstitched Fabric Cotton-LF",
+            "price": "Rs. 10,999",
+            "category": "Salwar kameez",
+            "rating": 4.3
+        },
+        {
+            "image": "https://www.gulahmedshop.com/media/catalog/product/b/l/black_formal_shirt_mn-fs-pd24-123_6_.jpg?optimize=medium&auto=webp&bg-color=255,255,255&fit=bounds&canvas=2:3&height",
+            "title": "Black Formal Shirt ",
+            "price": "Rs. 3,585 ",
+            "category": "pent shirt   ",
+            "rating": 4.9
+        }
+    ];
+
+    // Generate product cards
+    function generateProductCards(products) {
+        return products.map(product => `
+            <div class="product-card">
+                <img src="${product.image}" alt="${product.title}">
+                <h3>${product.title}</h3>
+                <p class="price">${product.price}</p>
+                <p class="category">${product.category}</p>
+                <p class="rating">Rating: ${product.rating} ★</p>
+ 
+
+                
+
+
+            </div>
+        `).join('');
+    }
+
+    // Insert product cards into the product-list
+    productList.innerHTML = generateProductCards(products);
+});
+
+    </script>
+    
+
+
+p
+</body>
+</html>
+
+
